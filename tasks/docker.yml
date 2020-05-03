@@ -1,0 +1,26 @@
+- name: Add Docker GPG apt key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu eoan stable
+    state: present
+  ignore_errors: yes
+
+- name: Update apt and install docker-ce
+  apt: name=docker-ce state=latest
+  ignore_errors: yes
+
+- name: Install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x,o+x'
+
+- name: Add user 'tom' to docker group
+  user:
+    name: tom
+    groups: docker
+    append: yes
