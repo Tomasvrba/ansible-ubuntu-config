@@ -1,9 +1,13 @@
 - hosts: localhost
   become: true
+  vars_files:
+    - vars/default.yml
+  pre_tasks:
+    - name: update repo index
+      apt: update_cache=yes state=latest
+      changed_when: False
+      ignore_errors: yes
+
   tasks:
-    - name: Install vim
-      apt: name=vim
-    - name: Install htop
-      apt: name=htop
-    - name: Install emacs
-      apt: name=emacs
+    - include: tasks/packages.yml
+

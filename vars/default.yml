@@ -1,0 +1,2 @@
+---
+packages: [ 'git', 'vim', 'emacs', 'curl', 'htop', 'gdebi', 'tmux', 'clang', 'llvm', 'libusb-1.0-0-dev', 'software-properties-common', 'apt-transport-https', 'build-essential', 'gucharmap', 'zsh', 'autojump', 'gnupg2', 'scdaemon', 'ubuntu-restricted-extras', 'chromium-browser', 'xclip', 'gcc', 'g++', 'make', 'gnome-tweaks', 'variety', 'filelight']
