@@ -16,6 +16,13 @@
   args:
     executable: /bin/bash
 
+- name: Change ~/.nvm ownership recursively
+  file:
+    path: /home/tom/.nvm
+    state: directory
+    recurse: yes
+    owner: tom
+
 - name: Create .yvm dir
   become: yes
   become_user: tom
