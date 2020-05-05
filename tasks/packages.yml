@@ -1,2 +1,8 @@
 - name: Install packages
   apt: name={{packages}} state=latest
+
+- name: Install snap packages
+  snap: name={{snap_packages}}
+
+- name: Install snap packages with --classic
+  snap: name={{snap_packages_classic}} classic=yes
