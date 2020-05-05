@@ -3,12 +3,64 @@
     repo: 'https://github.com/crytic/solc-select.git'
     dest: /etc/scripts/solc-select
 
+- name: Check if solc-select is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "which solc && exit"
+  register: solc_check
+  failed_when: no
+  changed_when: no
+
 - name: Install solc-select
   become: yes
   become_user: tom
   command: /etc/scripts/solc-select/scripts/install.sh
+  when: solc_check.stdout.find('solc-select') == -1
 
 - name: Add solc-select to PATH
   lineinfile:
     path: /home/tom/.bashrc
     line: 'export PATH=/home/tom/.solc-select:$PATH'
+
+- name: Check if truffle >v5 is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "truffle version && exit"
+  register: truffle_check
+  failed_when: no
+  changed_when: no
+
+- name: Install truffle
+  become: yes
+  become_user: tom
+  shell: bash -ilc "npm install truffle -g && exit"
+  when: truffle_check.stdout.find('Truffle v5') == -1
+ 
+- name: Check if openzeppeli-cli >v2.8 is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "openzeppelin --version && exit"
+  register: oz_check
+  failed_when: no
+  changed_when: no
+
+- name: Install OpenZeppelin SDK
+  become: yes
+  become_user: tom
+  shell: bash -ilc "npm install @openzeppelin/cli -g && exit"
+  when: oz_check.stdout.find('2.8') == -1
+
+- name: Check if ganache-cli >v6.9 is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "ganache-cli --version && exit"
+  register: ganache_check
+  failed_when: no
+  changed_when: no
+
+- name: Install ganache-cli
+  become: yes
+  become_user: tom
+  shell: bash -ilc "npm install ganache-cli -g && exit"
+  when: ganache_check.stdout.find('6.9') == -1
+
