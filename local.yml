@@ -15,4 +15,5 @@
     - include: tasks/packages.yml
     - include: tasks/docker.yml
     - include: tasks/node.yml
+    - include: tasks/ethereum.yml
 

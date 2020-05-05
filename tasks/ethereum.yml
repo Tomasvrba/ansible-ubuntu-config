@@ -1,0 +1,14 @@
+- name: Clone solc-select repo
+  git:
+    repo: 'https://github.com/crytic/solc-select.git'
+    dest: /etc/scripts/solc-select
+
+- name: Install solc-select
+  become: yes
+  become_user: tom
+  command: /etc/scripts/solc-select/scripts/install.sh
+
+- name: Add solc-select to PATH
+  lineinfile:
+    path: /home/tom/.bashrc
+    line: 'export PATH=/home/tom/.solc-select:$PATH'
