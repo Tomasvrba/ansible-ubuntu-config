@@ -1,0 +1,28 @@
+- name: Check if Typescript v3.8+ is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "tsc --version && exit"
+  register: tsc_check
+  failed_when: no
+  changed_when: no
+
+- name: Install typescript
+  become: yes
+  become_user: tom
+  shell: bash -ilc "npm install typescript -g && exit"
+  when: tsc_check.stdout.find('3.8.') == -1
+
+- name: Check if ts-node v8.10+ is installed
+  become: yes
+  become_user: tom
+  command: bash -ilc "ts-node --version && exit"
+  register: tsnode_check
+  failed_when: no
+  changed_when: no
+
+- name: Install ts-node
+  become: yes
+  become_user: tom
+  shell: bash -ilc "npm install ts-node -g && exit"
+  when: tsnode_check.stdout.find('8.10.') == -1
+

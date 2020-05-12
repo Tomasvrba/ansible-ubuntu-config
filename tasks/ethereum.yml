@@ -63,4 +63,3 @@
   become_user: tom
   shell: bash -ilc "npm install ganache-cli -g && exit"
   when: ganache_check.stdout.find('6.9') == -1
-
