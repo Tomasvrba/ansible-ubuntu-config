@@ -17,3 +17,4 @@
     - include: tasks/node.yml
     - include: tasks/ethereum.yml
     - include: tasks/npm_pacakges.yml
+    - include: tasks/gcloud.yml
